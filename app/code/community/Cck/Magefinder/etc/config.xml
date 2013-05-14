@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+ */
+-->
+<config>
+	<modules>
+		<Cck_Magefinder>
+			<version>1.7.0.2.1</version>
+		</Cck_Magefinder>
+	</modules>
+	<global>
+		<models>
+			<magefinder>
+				<class>Cck_Magefinder_Model</class>
+			</magefinder>
+		</models>
+		<blocks>
+			<magefinder>
+				<class>Cck_Magefinder_Block</class>
+			</magefinder>
+		</blocks>
+		<helpers>
+			<magefinder>
+				<class>Cck_Magefinder_Helper</class>
+			</magefinder>
+		</helpers>
+        <resources>
+           <magefinder_setup>
+               <setup>
+                   <module>Cck_Magefinder</module>
+               </setup>
+           </magefinder_setup>
+        </resources>
+	</global>
+    <admin>
+		<routers>
+			<magefinder>
+				<use>admin</use>
+				<args>
+					<module>Cck_Magefinder</module>
+					<frontName>magefinder</frontName>
+				</args>
+			</magefinder>
+		</routers>
+    </admin>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Cck_Magefinder>
+                    <files>
+                        <default>Cck_Magefinder.csv</default>
+                    </files>
+                </Cck_Magefinder>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <catalog>
+            <search>
+                <engine>magefinder/fulltext_engine</engine>
+            </search>
+        </catalog>
+    </default>
+</config>
