@@ -8,6 +8,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
     {
         $data    = array();
         $storeId = (int)$storeId;
+        $lang   = Mage::getStoreConfig('magefinder/advanced/language', $storeId);
         foreach ($entityIndexes as $entityId => $index) {
             $index['api_key']       = 'test123';
             $index['store_id']      = (int)$storeId;
@@ -15,7 +16,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
             $data[] = array(
                 'type'  => 'add',
                 'id'    => (int)$entityId,
-                'lang'  => 'en',
+                'lang'  => $lang,
                 'version' => $this->_getVersion(),
                 'fields'  => $index
             );

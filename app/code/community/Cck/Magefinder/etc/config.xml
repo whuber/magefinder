@@ -41,6 +41,23 @@
                </setup>
            </magefinder_setup>
         </resources>
+        <magefinder>
+            <attributes>
+                <name>Name</name>                
+                <short_description>Short Description</short_description>
+                <description>Description</description>
+                <price>Price</price>
+                <text_01>Text Field 1</text_01>
+                <text_02>Text Field 2</text_02>
+                <text_03>Text Field 3</text_03>
+                <literal_01>Literal Field 1</literal_01>
+                <literal_02>Literal Field 2</literal_02>
+                <literal_03>Literal Field 3</literal_03>
+                <unit_01>Unsigned Integer Field 1</unit_01>
+                <unit_02>Unsigned Integer Field 2</unit_02>
+                <unit_03>Unsigned Integer Field 3</unit_03>
+            </attributes>
+        </magefinder>
 	</global>
     <admin>
 		<routers>

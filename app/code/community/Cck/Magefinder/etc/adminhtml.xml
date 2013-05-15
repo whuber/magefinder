@@ -8,6 +8,10 @@
 						<children>
 							<config>
 								<children>
+									<magefinder translate="title">
+										<title>Magefinder</title>
+									    <sort_order>30</sort_order>
+									</magefinder>
 								</children>
 							</config>
 						</children>

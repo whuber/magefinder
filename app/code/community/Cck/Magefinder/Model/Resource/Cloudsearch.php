@@ -2,16 +2,13 @@
 
 class Cck_Magefinder_Model_Resource_Cloudsearch
 {
-    protected $_search_endpoint = 'search-magefinder-test-pyokc5khfqsu64m4i7qxba6vz4.eu-west-1.cloudsearch.amazonaws.com';
-    protected $_doc_endpoint    = 'doc-magefinder-test-pyokc5khfqsu64m4i7qxba6vz4.eu-west-1.cloudsearch.amazonaws.com';
 
     public function import($data) 
     {
-        $url = "http://" . $this->_doc_endpoint . "/2011-02-01/documents/batch";
 //		Mage::log("Import " . json_encode($data));
-		$client = new Zend_Http_Client($url);
+		$client = $this->_getDocClient();
 		$client->setRawData(json_encode($data), "application/json");
-		$response = $client->request("POST");
+//		$response = $client->request("POST");
 //		Mage::log("import" . print_r($response, 1));
 //        die(__METHOD__);
 	}
@@ -26,8 +23,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     {
 //        Mage::log(__METHOD__ . " ($storeId)");
 //        Mage::log($queryText);
-        $url = "http://" . $this->_search_endpoint . "/2011-02-01/search";
-		$client = new Zend_Http_Client($url);
+		$client = $this->_getSearchClient();
 		$client->setParameterGet('q', $queryText);
 		$client->setParameterGet('bq', 'store_id:'.$storeId);
 		$client->setParameterGet('return-fields', 'product_id,name,text_relevance');
@@ -49,6 +45,20 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         }
 //        Mage::log($data);
         return $data;
+    }
+    
+    protected function _getDocClient()
+    {
+        $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
+                . "/2011-02-01/documents/batch";
+		return new Zend_Http_Client($url);
+    }
+    
+    protected function _getSearchClient()
+    {
+        $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
+                . "/2011-02-01/search";
+		return new Zend_Http_Client($url);
     }
 
 }

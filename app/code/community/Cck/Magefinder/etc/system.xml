@@ -1,5 +1,102 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <config>
     <sections>
+        <magefinder translate="label" module="magefinder">
+            <label>Magefinder</label>
+            <tab>catalog</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>400</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <version translate="label">
+                            <label>Extension Version</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>magefinder/adminhtml_config_version</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </version>
+                        <active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <access_key translate="label">
+                            <label>Access Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </access_key>
+                        <access_secret translate="label">
+                            <label>Access Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </access_secret>
+                    </fields>
+                </general>
+                <advanced>
+                    <label>Advanced Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <mapping translate="label">
+                            <label>Attributes Mapping</label>
+                            <frontend_model>magefinder/adminhtml_config_mapping</frontend_model>
+                            <backend_model>magefinder/system_config_backend_mapping</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>After adding new attributes go to System/Index Management and run reindex of 'Catalog Search Index'</comment>
+                        </mapping>
+                        <doc_endpoint translate="label">
+                            <label>Document Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </doc_endpoint>
+                        <search_endpoint translate="label">
+                            <label>Search Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </search_endpoint>
+                        <language translate="label">
+                            <label>Language</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </language>
+                    </fields>
+                </advanced>
+            </groups>
+        </magefinder>
     </sections>
 </config>
