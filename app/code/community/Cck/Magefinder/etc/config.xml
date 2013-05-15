@@ -6,14 +6,23 @@
 <config>
 	<modules>
 		<Cck_Magefinder>
-			<version>1.7.0.2.1</version>
+			<version>1.7.0.2.0</version>
 		</Cck_Magefinder>
 	</modules>
 	<global>
 		<models>
 			<magefinder>
 				<class>Cck_Magefinder_Model</class>
+                <resourceModel>magefinder_resource</resourceModel>
 			</magefinder>
+            <magefinder_resource>
+                <class>Cck_Magefinder_Model_Resource</class>
+            </magefinder_resource>
+            <catalogsearch_resource>
+                <rewrite>
+                    <fulltext>Cck_Magefinder_Model_Resource_Fulltext</fulltext>
+                </rewrite>
+            </catalogsearch_resource>
 		</models>
 		<blocks>
 			<magefinder>
