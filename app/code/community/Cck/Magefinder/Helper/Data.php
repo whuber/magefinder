@@ -8,6 +8,7 @@
 class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
 {
     protected $_attr_mapping = null;
+    protected $_version = null;
 
     /**
      * Join index array to string by separator
@@ -102,6 +103,20 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         }
         $string .= 'secret:'.Mage::getStoreConfig('magefinder/general/access_secret');
         return md5($string);
+    }
+
+    public function getVersion()
+    {
+        if(is_null($this->_version)) {
+            $this->_version = time() - strtotime("2013-05-01");
+        }
+        return $this->_version;
+    }
+
+    public function getCfId($entityId, $storeId)
+    {
+        return Mage::getStoreConfig('magefinder/general/access_key', $storeId)
+            . "_" . $entityId . "_" . $storeId;
     }
 
 }

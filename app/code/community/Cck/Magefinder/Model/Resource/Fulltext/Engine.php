@@ -2,7 +2,6 @@
 
 class Cck_Magefinder_Model_Resource_Fulltext_Engine 
 {
-    protected $_version = null;
 
     public function saveEntityIndexes($storeId, $entityIndexes, $entity = 'product') 
     {
@@ -10,14 +9,14 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         $storeId = (int)$storeId;
         $lang   = Mage::getStoreConfig('magefinder/advanced/language', $storeId);
         foreach ($entityIndexes as $entityId => $index) {
-            $index['api_key']       = Mage::getStoreConfig('magefinder/general/access_key', $storeId);;
+            $index['api_key']       = Mage::getStoreConfig('magefinder/general/access_key', $storeId);
             $index['store_id']      = (int)$storeId;
             $index['product_id']    = (int)$entityId;
             $data[] = array(
                 'type'  => 'add',
-                'id'    => (int)$entityId,
+                'id'    => Mage::helper('magefinder')->getCfId($entityId, $storeId),
                 'lang'  => $lang,
-                'version' => $this->_getVersion(),
+                'version' => Mage::helper('magefinder')->getVersion(),
                 'fields'  => $index
             );
         }
@@ -29,14 +28,6 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         return $this;
 	}
 
-    protected function _getVersion()
-    {
-        if(is_null($this->_version)) {
-            $this->_version = time() - strtotime("2013-05-01");
-        }
-        return $this->_version;
-    }
-    
 	public function allowAdvancedIndex()
     {
 		return false;
@@ -44,7 +35,12 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
 
     public function cleanIndex($storeId = null, $entityId = null, $entity = 'product')
     {
-        $this->_getDocAdapter()->delete($storeId, $entityId);
+        if(is_null($entityId)) {
+            $this->_getDocAdapter()->truncate($storeId);
+        }
+        else {
+            $this->_getDocAdapter()->delete($storeId, $entityId);
+        }
     }
 
     public function prepareEntityIndex($index, $separator = ' ')

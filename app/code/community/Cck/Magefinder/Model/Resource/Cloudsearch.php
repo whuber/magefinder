@@ -11,12 +11,57 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 		$client->setRawData(json_encode($data), "application/json");
 		$response = $client->request("POST");
 //		Mage::log("import" . print_r($response, 1));
-//        die(__METHOD__);
 	}
     
-    public function delete($storeId, $productIds = null)
+    public function truncate($storeId)
     {
-        //TODO - delete whole index or specific products
+		$client = $this->_getDocClient();
+        
+        $params = array(
+            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'store' => $storeId,
+            'action' => 'truncate',
+            'version' => Mage::helper('magefinder')->getVersion(),
+        );
+        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        $client->setParameterGet($params);
+
+        try {
+            $response = $client->request();
+            Mage::log($response);
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+
+        return $this;
+    }
+    
+    public function delete($storeId, $productIds)
+    {
+		$client = $this->_getDocClient();
+        
+        $params = array(
+            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'store' => $storeId,
+            'action' => 'delete',
+            'version' => Mage::helper('magefinder')->getVersion(),
+        );
+        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        $client->setParameterGet($params);
+
+        $data = array();
+        foreach($productIds as $id) {
+            $data[] = Mage::helper('magefinder')->getCfId($id, $storeId);
+        }
+        try {
+            $client->setRawData(json_encode($data), "application/json");
+            $response = $client->request("POST");
+//            Mage::log($response);
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
         return $this;
     }
     
@@ -60,7 +105,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     protected function _getDocClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-                . "/2011-02-01/documents/batch";
+                . "/doc.php";
 		return new Zend_Http_Client($url);
     }
     
