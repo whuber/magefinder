@@ -8,9 +8,22 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 //		Mage::log("Import " . json_encode($data));
 //		Mage::log($data);
 		$client = $this->_getDocClient();
-		$client->setRawData(json_encode($data), "application/json");
-		$response = $client->request("POST");
-//		Mage::log("import" . print_r($response, 1));
+        
+        $params = array(
+            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'action' => 'update',
+        );
+        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        $client->setParameterGet($params);
+
+        try {
+            $client->setRawData(json_encode($data), "application/json");
+            $response = $client->request("POST");
+//            Mage::log($response);
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
 	}
     
     public function truncate($storeId)
