@@ -6,9 +6,10 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     public function import($data) 
     {
 //		Mage::log("Import " . json_encode($data));
+//		Mage::log($data);
 		$client = $this->_getDocClient();
 		$client->setRawData(json_encode($data), "application/json");
-//		$response = $client->request("POST");
+		$response = $client->request("POST");
 //		Mage::log("import" . print_r($response, 1));
 //        die(__METHOD__);
 	}
@@ -32,10 +33,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
-        
-        foreach($params as $key => $val) {
-            $client->setParameterGet($key, (string)$val);
-        }
+        $client->setParameterGet($params);
 
         try {
             $response = $client->request();
@@ -50,12 +48,9 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         }
         $resultBody = json_decode($response->getBody());
 //        Mage::log($resultBody);
-        if($resultBody->hits->found > 0) {
-            foreach($resultBody->hits->hit as $hit) {
-                $data[] = array(
-                    'product_id' => $hit->data->product_id[0],
-                    'relevance' => $hit->data->text_relevance[0],
-                );
+        if($resultBody->found > 0) {
+            foreach($resultBody->hits as $hit) {
+                $data[] = (array)$hit;
             }
         }
 //        Mage::log($data);
