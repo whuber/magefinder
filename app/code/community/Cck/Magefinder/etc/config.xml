@@ -6,7 +6,7 @@
 <config>
 	<modules>
 		<Cck_Magefinder>
-			<version>1.7.0.2.0</version>
+			<version>1.7.0.0</version>
 		</Cck_Magefinder>
 	</modules>
 	<global>

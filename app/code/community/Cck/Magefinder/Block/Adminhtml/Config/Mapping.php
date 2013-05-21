@@ -6,11 +6,11 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
     {
         $this->addColumn('attribute', array(
             'label' => Mage::helper('adminhtml')->__('Attribute'),
-            'style' => 'width:120px',
+            'style' => 'width:280px',
         ));
         $this->addColumn('search_attribute', array(
             'label' => Mage::helper('adminhtml')->__('Search Attribute'),
-            'style' => 'width:120px',
+            'style' => 'width:200px',
         ));
         $this->addColumn('weight', array(
             'label' => Mage::helper('adminhtml')->__('Weight'),
@@ -40,7 +40,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
             $productAttributeCollection = Mage::getResourceModel('catalog/product_attribute_collection');
             $productAttributeCollection->addIsSearchableFilter();
 
-            $html = '<select class="select" name="' . $inputName . '">';
+            $html = '<select class="select" name="' . $inputName . '" style="'.$column['style'].'">';
             $html .= '<option value="">'
                     . $this->__('-- Please Select --')
                     .'</option>';
@@ -54,7 +54,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
 
         } elseif ($columnName == 'search_attribute') {
             $searchAttributes = Mage::getConfig()->getNode('global/magefinder/attributes');
-            $html = '<select class="select" name="' . $inputName . '">';
+            $html = '<select class="select" name="' . $inputName . '" style="'.$column['style'].'">';
             $html .= '<option value="">'
                     . $this->__('-- Please Select --')
                     .'</option>';
