@@ -24,10 +24,25 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 //        Mage::log(__METHOD__ . " ($storeId)");
 //        Mage::log($queryText);
 		$client = $this->_getSearchClient();
-		$client->setParameterGet('q', $queryText);
-		$client->setParameterGet('bq', 'store_id:'.$storeId);
-		$client->setParameterGet('return-fields', 'product_id,name,text_relevance');
-		$response = $client->request();
+        
+        $params = array(
+            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'store' => $storeId,
+            'q' => $queryText,
+        );
+        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        
+        foreach($params as $key => $val) {
+            $client->setParameterGet($key, (string)$val);
+        }
+
+        try {
+            $response = $client->request();
+//            Mage::log($client->getLastRequest());
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
         
         $data = array();
         if($response->getStatus() != 200) {
@@ -57,7 +72,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     protected function _getSearchClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-                . "/2011-02-01/search";
+                . "/search.php";
 		return new Zend_Http_Client($url);
     }
 

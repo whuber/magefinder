@@ -92,5 +92,16 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         }
         return $this->_attr_mapping;
     }
+    
+    public function generateHash($params) 
+    {
+        sort($params);
+        $string = '';
+        foreach($params as $key => $val) {
+            $string .= "$key:$val";
+        }
+        $string .= 'secret:'.Mage::getStoreConfig('magefinder/general/access_secret');
+        return md5($string);
+    }
 
 }
