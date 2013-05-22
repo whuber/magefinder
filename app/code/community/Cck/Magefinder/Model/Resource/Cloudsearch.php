@@ -5,8 +5,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 
     public function import($data) 
     {
-//		Mage::log("Import " . json_encode($data));
-//		Mage::log($data);
 		$client = $this->_getDocClient();
         
         $params = array(
@@ -20,7 +18,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         try {
             $client->setRawData(json_encode($data), "application/json");
             $response = $client->request("POST");
-//            Mage::log($response);
         } catch (Exception $e) {
             Mage::logException($e);
         }
@@ -64,14 +61,9 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
         $client->setParameterGet($params);
 
-        $data = array();
-        foreach($productIds as $id) {
-            $data[] = Mage::helper('magefinder')->getCfId($id, $storeId);
-        }
         try {
-            $client->setRawData(json_encode($data), "application/json");
+            $client->setRawData(json_encode($productIds), "application/json");
             $response = $client->request("POST");
-//            Mage::log($response);
         } catch (Exception $e) {
             Mage::logException($e);
         }
@@ -80,8 +72,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     
     public function query($queryText, $storeId)
     {
-//        Mage::log(__METHOD__ . " ($storeId)");
-//        Mage::log($queryText);
 		$client = $this->_getSearchClient();
         
         $params = array(
@@ -95,9 +85,9 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 
         try {
             $response = $client->request();
-//            Mage::log($client->getLastRequest());
         } catch (Exception $e) {
             Mage::logException($e);
+            return array();
         }
         
         $data = array();
@@ -105,13 +95,11 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             return $data; 
         }
         $resultBody = json_decode($response->getBody());
-//        Mage::log($resultBody);
         if($resultBody->found > 0) {
             foreach($resultBody->hits as $hit) {
                 $data[] = (array)$hit;
             }
         }
-//        Mage::log($data);
         return $data;
     }
     
