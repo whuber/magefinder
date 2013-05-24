@@ -39,7 +39,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 
         try {
             $response = $client->request();
-            Mage::log($response);
+//            Mage::log($response);
         } catch (Exception $e) {
             Mage::logException($e);
         }
@@ -78,6 +78,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => $storeId,
             'q' => $queryText,
+            'weight' => Mage::helper('magefinder')->getWeight(),
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);

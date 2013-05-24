@@ -8,6 +8,7 @@
 class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
 {
     protected $_attr_mapping = null;
+    protected $_attr_weight = null;
     protected $_version = null;
 
     /**
@@ -117,6 +118,19 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig('magefinder/general/access_key', $storeId)
             . "_" . $entityId . "_" . $storeId;
+    }
+
+    public function getWeight()
+    {
+        if(is_null($this->_attr_weight)) {
+            $data = unserialize(Mage::getStoreConfig('magefinder/advanced/mapping'));
+            $_mapping = array();
+            foreach($data as $row) {
+                $_mapping[] = $row['search_attribute'] . "=" . $row['weight'];
+            }
+            $this->_attr_weight = implode('|', $_mapping);
+        }
+        return $this->_attr_weight;
     }
 
 }
