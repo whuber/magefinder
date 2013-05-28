@@ -75,5 +75,5 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         Mage::log($args);
         return Mage::getResourceSingleton('catalogsearch/fulltext_engine')->$method($args);
     }
-    
+
 };

@@ -111,10 +111,4 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         return md5($string);
     }
 
-    public function getCfId($entityId, $storeId)
-    {
-        return Mage::getStoreConfig('magefinder/general/access_key', $storeId)
-            . "_" . $entityId . "_" . $storeId;
-    }
-
 }

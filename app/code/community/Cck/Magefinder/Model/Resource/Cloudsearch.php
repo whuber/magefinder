@@ -108,14 +108,14 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     protected function _getDocClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-                . "/doc.php";
+                . "/document";
 		return new Zend_Http_Client($url);
     }
     
     protected function _getSearchClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-                . "/search.php";
+                . "/search";
 		return new Zend_Http_Client($url);
     }
 
