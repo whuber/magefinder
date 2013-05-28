@@ -24,7 +24,7 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         $_index = array();
         $text_garbage = array();
         foreach ($index as $key => $value) {
-            if(in_array($key, array('sku', 'status'))) continue;
+            if(in_array($key, array('status'))) continue;
             $attr = Mage::getSingleton('eav/config')
                         ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $key);
 
@@ -77,9 +77,14 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
                 }
             }
         }
-        $_index['text_garbage'] = implode(', ', array_unique($text_garbage));
+        $_index['text_garbage'] = $this->_cleanString(implode(', ', array_unique($text_garbage)));
 //        Mage::log($_index);
         return $_index;
+    }
+    
+    protected function _cleanString($text)
+    {
+        return $text;
     }
     
     protected function _getAttributeMapping()
@@ -106,31 +111,10 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         return md5($string);
     }
 
-    public function getVersion()
-    {
-        if(is_null($this->_version)) {
-            $this->_version = time() - strtotime("2013-05-01");
-        }
-        return $this->_version;
-    }
-
     public function getCfId($entityId, $storeId)
     {
         return Mage::getStoreConfig('magefinder/general/access_key', $storeId)
             . "_" . $entityId . "_" . $storeId;
-    }
-
-    public function getWeight()
-    {
-        if(is_null($this->_attr_weight)) {
-            $data = unserialize(Mage::getStoreConfig('magefinder/advanced/mapping'));
-            $_mapping = array();
-            foreach($data as $row) {
-                $_mapping[] = $row['search_attribute'] . "=" . $row['weight'];
-            }
-            $this->_attr_weight = implode('|', $_mapping);
-        }
-        return $this->_attr_weight;
     }
 
 }

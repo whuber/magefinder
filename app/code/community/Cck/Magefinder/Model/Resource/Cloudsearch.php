@@ -3,13 +3,14 @@
 class Cck_Magefinder_Model_Resource_Cloudsearch
 {
 
-    public function import($data) 
+    public function import($data, $storeId) 
     {
 		$client = $this->_getDocClient();
         
         $params = array(
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'action' => 'update',
+            'store' => $storeId,
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
@@ -21,6 +22,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         } catch (Exception $e) {
             Mage::logException($e);
         }
+//        Mage::log($response->getLastRequest());
 	}
     
     public function truncate($storeId)
@@ -31,7 +33,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => $storeId,
             'action' => 'truncate',
-            'version' => Mage::helper('magefinder')->getVersion(),
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
@@ -44,6 +45,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             Mage::logException($e);
         }
 
+//        Mage::log($response->getLastRequest());
         return $this;
     }
     
@@ -55,7 +57,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => $storeId,
             'action' => 'delete',
-            'version' => Mage::helper('magefinder')->getVersion(),
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
@@ -67,6 +68,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         } catch (Exception $e) {
             Mage::logException($e);
         }
+//        Mage::log($client->getLastRequest());
         return $this;
     }
     
@@ -78,7 +80,6 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => $storeId,
             'q' => $queryText,
-            'weight' => Mage::helper('magefinder')->getWeight(),
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);

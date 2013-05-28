@@ -8,16 +8,12 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         $data    = array();
         $storeId = (int)$storeId;
         foreach ($entityIndexes as $entityId => $index) {
-            $index['store_id']      = (int)$storeId;
             $index['product_id']    = (int)$entityId;
-            $data[] = array(
-                'version' => Mage::helper('magefinder')->getVersion(),
-                'fields'  => $index
-            );
+            $data[] = $index;
         }
 
         if ($data) {
-            $this->_getDocAdapter()->import($data);
+            $this->_getDocAdapter()->import($data, $storeId);
         }
 
         return $this;
