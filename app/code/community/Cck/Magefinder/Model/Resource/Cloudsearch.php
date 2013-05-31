@@ -17,13 +17,14 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         $client->setParameterGet($params);
 
         try {
+//            Mage::log($data);
             $client->setRawData(json_encode($data), "application/json");
             $response = $client->request("POST");
         } catch (Exception $e) {
             Mage::logException($e);
         }
 //        Mage::log($response->getLastRequest());
-	}
+ 	}
     
     public function truncate($storeId)
     {
@@ -108,14 +109,14 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     protected function _getDocClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-                . "/document";
+                . "/document/index.php";
 		return new Zend_Http_Client($url);
     }
     
     protected function _getSearchClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-                . "/search";
+                . "/search/index.php";
 		return new Zend_Http_Client($url);
     }
 

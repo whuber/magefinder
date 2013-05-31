@@ -44,6 +44,7 @@
         <magefinder>
             <attributes>
                 <name>Name</name>                
+                <sku>Sku</sku>                
                 <short_description>Short Description</short_description>
                 <description>Description</description>
                 <price>Price</price>

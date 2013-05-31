@@ -7,22 +7,22 @@ $initConfig = array(
     array(
         'attribute' => 'name',
         'search_attribute' => 'name',
-        'weight' => '',
+    ),
+    array(
+        'attribute' => 'sku',
+        'search_attribute' => 'sku',
     ),
     array(
         'attribute' => 'short_description',
         'search_attribute' => 'short_description',
-        'weight' => '',
     ),
     array(
         'attribute' => 'description',
         'search_attribute' => 'description',
-        'weight' => '',
     ),
     array(
         'attribute' => 'price',
         'search_attribute' => 'price',
-        'weight' => '',
     ),
 );
 

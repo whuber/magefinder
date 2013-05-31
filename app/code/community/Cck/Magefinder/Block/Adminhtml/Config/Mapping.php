@@ -12,10 +12,6 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
             'label' => Mage::helper('adminhtml')->__('Search Attribute'),
             'style' => 'width:200px',
         ));
-        $this->addColumn('weight', array(
-            'label' => Mage::helper('adminhtml')->__('Weight'),
-            'style' => 'width:60px',
-        ));
         $this->_addAfter = false;
         $this->_addButtonLabel = Mage::helper('adminhtml')->__('Add Mapping');
         parent::__construct();
@@ -63,12 +59,6 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
             }
             $html .= '</select>';
             return $html;
-
-        } else {
-            return '<input type="text" name="' . $inputName . '" value="#{' . $columnName . '}" ' .
-                ($column['size'] ? 'size="' . $column['size'] . '"' : '') . ' class="' .
-                (isset($column['class']) ? $column['class'] : 'input-text') . '"'.
-                (isset($column['style']) ? ' style="'.$column['style'] . '"' : '') . '/>';
         }
     }
 
