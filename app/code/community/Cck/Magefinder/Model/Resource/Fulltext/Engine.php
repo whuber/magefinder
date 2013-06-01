@@ -66,7 +66,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
 
     public function test()
     {
-        return true;
+        return Mage::getStoreConfigFlag('magefinder/general/active');
     }
 
     public function __call($method, $args)

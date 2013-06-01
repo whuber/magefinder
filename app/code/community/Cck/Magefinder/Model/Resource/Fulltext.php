@@ -16,12 +16,11 @@ class Cck_Magefinder_Model_Resource_Fulltext extends Mage_CatalogSearch_Model_Re
      */
     public function prepareResult($object, $queryText, $query)
     {
+        if(!Mage::getStoreConfigFlag('magefinder/general/active')) {
+            return parent::prepareResult($object, $queryText, $query);
+        }
         $adapter = $this->_getWriteAdapter();
         if (!$query->getIsProcessed()) {
-            $searchType = $object->getSearchType($query->getStoreId());
-
-            $preparedTerms = Mage::getResourceHelper('catalogsearch')
-                ->prepareTerms($queryText, $query->getMaxQueryWords());
 
             $result = $this->_getSearchAdapter()->query($queryText, (int)$query->getStoreId());
             $data = array();

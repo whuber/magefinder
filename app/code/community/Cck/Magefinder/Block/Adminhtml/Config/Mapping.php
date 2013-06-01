@@ -55,7 +55,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
                     . $this->__('-- Please Select --')
                     .'</option>';
             foreach ($searchAttributes->children() as $name => $title) {
-                $html .= '<option value="'.$name.'" #{option_search_'.$name.'}>' . (string)$title . '</option>';
+                $html .= '<option value="'.$name.'" #{option_search_'.$name.'}>' . $this->__((string)$title) . '</option>';
             }
             $html .= '</select>';
             return $html;
