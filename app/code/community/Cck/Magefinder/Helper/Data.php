@@ -10,6 +10,7 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_attr_mapping = null;
     protected $_attr_weight = null;
     protected $_version = null;
+    protected $_user_agent = null;
 
     /**
      * Join index array to string by separator
@@ -109,6 +110,22 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         }
         $string .= 'secret:'.Mage::getStoreConfig('magefinder/general/access_secret');
         return md5($string);
+    }
+    
+    public function getUserAgent()
+    {
+        if(is_null($this->_user_agent)) {
+            $this->_user_agent = "Magefinder Client v" 
+                . Mage::getConfig()->getModuleConfig('Cck_Magefinder')->version;
+        }
+        return $this->_user_agent;
+    }
+    
+    public function log($message)
+    {
+        if(Mage::getStoreConfigFlag('magefinder/advanced/logging')) {
+            Mage::log($message, null, 'magefinder.log', true);
+        }
     }
 
 }

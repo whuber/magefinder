@@ -20,10 +20,10 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 //            Mage::log($data);
             $client->setRawData(json_encode($data), "application/json");
             $response = $client->request("POST");
+            $this->_logResponse($response, $client);
         } catch (Exception $e) {
             Mage::logException($e);
         }
-//        Mage::log($response->getLastRequest());
  	}
     
     public function truncate($storeId)
@@ -41,13 +41,10 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 
         try {
             $response = $client->request();
-//            Mage::log($response);
+            $this->_logResponse($response, $client);
         } catch (Exception $e) {
             Mage::logException($e);
         }
-
-//        Mage::log($response->getLastRequest());
-        return $this;
     }
     
     public function delete($storeId, $productIds)
@@ -66,10 +63,10 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
         try {
             $client->setRawData(json_encode($productIds), "application/json");
             $response = $client->request("POST");
+            $this->_logResponse($response, $client);
         } catch (Exception $e) {
             Mage::logException($e);
         }
-//        Mage::log($client->getLastRequest());
         return $this;
     }
     
@@ -88,6 +85,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
 
         try {
             $response = $client->request();
+            $this->_logResponse($response, $client);
         } catch (Exception $e) {
             Mage::logException($e);
             return array();
@@ -110,14 +108,28 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
                 . "/document/index.php";
-		return new Zend_Http_Client($url);
+		return new Zend_Http_Client($url, array(
+            'timeout' => 300,
+            'useragent' => Mage::helper('magefinder')->getUserAgent()
+        ));
     }
     
     protected function _getSearchClient()
     {
         $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
                 . "/search/index.php";
-		return new Zend_Http_Client($url);
+		return new Zend_Http_Client($url, array(
+            'useragent' => Mage::helper('magefinder')->getUserAgent()
+        ));
+    }
+    
+    protected function _logResponse(Zend_Http_Response $response, Zend_Http_Client $client)
+    {
+        $helper = Mage::helper('magefinder');
+        $lastRequest = preg_split('|(?:\r?\n){2}|m', $client->getLastRequest());
+        $helper->log($lastRequest[0] . "\n");
+        $helper->log($response->getHeadersAsString());
+        $helper->log(json_decode($response->getBody()));
     }
 
 }
