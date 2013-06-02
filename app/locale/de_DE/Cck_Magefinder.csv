@@ -30,3 +30,4 @@
 "Unsigned Integer Field 3","Zahlenfeld 3"
 "Unsigned Integer Field 4","Zahlenfeld 4"
 "Unsigned Integer Field 5","Zahlenfeld 5"
+"After mapping attributes go to 'System > Index Management' and run reindex of 'Catalog Search Index'","Nach dem Bearbeiten der Verbindungen starten sie die Indexierung unter 'System > Index-Verwaltung' über 'Katalog Suchindex' neu"
