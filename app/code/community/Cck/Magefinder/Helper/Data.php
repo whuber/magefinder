@@ -8,7 +8,7 @@
 class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
 {
     protected $_attr_mapping = null;
-    protected $_attr_weight = null;
+    protected $_excl_mapping = null;
     protected $_version = null;
     protected $_user_agent = null;
 
@@ -23,7 +23,7 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
         $_index = array();
         $text_garbage = array();
         foreach ($index as $key => $value) {
-            if(in_array($key, array('status'))) continue;
+            if(in_array($key, $this->_getExcludeMapping())) continue;
             $attr = Mage::getSingleton('eav/config')
                         ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $key);
 
@@ -91,6 +91,21 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
             $this->_attr_mapping = $_mapping;
         }
         return $this->_attr_mapping;
+    }
+    
+    protected function _getExcludeMapping()
+    {
+        if(is_null($this->_excl_mapping)) {
+            $data = unserialize(Mage::getStoreConfig('magefinder/advanced/mapping'));
+            $_mapping = array('status');
+            foreach($data as $row) {
+                if(empty($row['search_attribute'])) {
+                    $_mapping[] = $row['attribute'];
+                }
+            }
+            $this->_excl_mapping = $_mapping;
+        }
+        return $this->_excl_mapping;
     }
     
     public function generateHash($params) 
