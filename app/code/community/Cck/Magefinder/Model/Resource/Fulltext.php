@@ -1,7 +1,9 @@
 <?php
 /**
- * Magefinder Fulltext Index resource model
+ * Magefinder extension
  *
+ * @category   Cck
+ * @package    Cck_Magefinder
  */
 class Cck_Magefinder_Model_Resource_Fulltext extends Mage_CatalogSearch_Model_Resource_Fulltext
 {
@@ -40,7 +42,12 @@ class Cck_Magefinder_Model_Resource_Fulltext extends Mage_CatalogSearch_Model_Re
 
         return $this;
     }
-    
+
+    /**
+     * Retrieve connection for query data
+     *
+     * @return Cck_Magefinder_Model_Resource_Cloudsearch
+     */
     protected function _getSearchAdapter()
     {
         return Mage::getResourceSingleton('magefinder/cloudsearch');

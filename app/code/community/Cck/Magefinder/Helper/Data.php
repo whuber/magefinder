@@ -14,14 +14,12 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
 
     /**
      * Join index array to string by separator
-     * Support 2 level array gluing
+     * Supports attribute mapping from config
      * @param array $index
-     * @param string $separator
      * @return string
      */
-    public function prepareIndexdata($index, $separator = ' ')
+    public function prepareIndexdata($index)
     {
-//        Mage::log($index);
         $_index = array();
         $text_garbage = array();
         foreach ($index as $key => $value) {
@@ -78,14 +76,8 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
                 }
             }
         }
-        $_index['text_garbage'] = $this->_cleanString(implode(', ', array_unique($text_garbage)));
-//        Mage::log($_index);
+        $_index['text_garbage'] = implode(', ', array_unique($text_garbage));
         return $_index;
-    }
-    
-    protected function _cleanString($text)
-    {
-        return $text;
     }
     
     protected function _getAttributeMapping()

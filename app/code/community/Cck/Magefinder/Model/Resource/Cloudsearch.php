@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Magefinder extension
+ *
+ * @category   Cck
+ * @package    Cck_Magefinder
+ */
 class Cck_Magefinder_Model_Resource_Cloudsearch
 {
 
@@ -125,6 +130,10 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     
     protected function _logResponse(Zend_Http_Response $response, Zend_Http_Client $client)
     {
+        if(!Mage::getStoreConfigFlag('magefinder/advanced/logging')) {
+            return;
+        }
+
         $helper = Mage::helper('magefinder');
         $lastRequest = preg_split('|(?:\r?\n){2}|m', $client->getLastRequest());
         $helper->log($lastRequest[0] . "\n");

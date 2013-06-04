@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Magefinder extension
+ *
+ * @category   Cck
+ * @package    Cck_Magefinder
+ */
+-->
 <config>
 	<acl>
 		<resources>

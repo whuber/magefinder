@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magefinder extension
+ *
+ * @category   Cck
+ * @package    Cck_Magefinder
+ */
+-->
 <config>
     <sections>
         <magefinder translate="label" module="magefinder">
@@ -94,7 +102,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment>At the moment only English available</comment>
+                            <comment>At the moment English available only</comment>
                         </language>-->
                         <logging translate="label">
                             <label>Logging</label>

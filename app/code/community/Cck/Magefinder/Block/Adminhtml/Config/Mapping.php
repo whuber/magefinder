@@ -1,7 +1,17 @@
 <?php
+/**
+ * Magefinder extension
+ *
+ * @category   Cck
+ * @package    Cck_Magefinder
+ */
 class Cck_Magefinder_Block_Adminhtml_Config_Mapping 
     extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
 {
+    /**
+     * Add columns, add mapping button
+     *
+     */
     public function __construct()
     {
         $this->addColumn('attribute', array(
@@ -62,6 +72,10 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
         }
     }
 
+    /**
+     * Assign selected value to row
+     *
+     */
     protected function _prepareArrayRow(Varien_Object $row)
     {
         $row['option_'.$row['attribute']] = 'selected';
