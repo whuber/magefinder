@@ -109,7 +109,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
      */
     protected function _getDocAdapter()
     {
-        return Mage::getResourceSingleton('magefinder/cloudsearch');
+        return Mage::getResourceSingleton('magefinder/magefinder');
     }
 
     /**

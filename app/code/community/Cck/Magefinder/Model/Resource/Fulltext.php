@@ -50,7 +50,7 @@ class Cck_Magefinder_Model_Resource_Fulltext extends Mage_CatalogSearch_Model_Re
      */
     protected function _getSearchAdapter()
     {
-        return Mage::getResourceSingleton('magefinder/cloudsearch');
+        return Mage::getResourceSingleton('magefinder/magefinder');
     }
 
 }

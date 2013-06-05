@@ -5,7 +5,7 @@
  * @category   Cck
  * @package    Cck_Magefinder
  */
-class Cck_Magefinder_Model_Resource_Cloudsearch
+class Cck_Magefinder_Model_Resource_Magefinder
 {
 
     public function import($data, $storeId) 
@@ -111,8 +111,7 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     
     protected function _getDocClient()
     {
-        $url = "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-                . "/document/index.php";
+        $url = Mage::helper('magefinder/url')->getDocumentUrl();
 		return new Zend_Http_Client($url, array(
             'timeout' => 300,
             'useragent' => Mage::helper('magefinder')->getUserAgent()
@@ -121,8 +120,9 @@ class Cck_Magefinder_Model_Resource_Cloudsearch
     
     protected function _getSearchClient()
     {
-        $url = "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-                . "/search/index.php";
+        $url = Mage::helper('magefinder/url')->getSearchUrl(
+                Cck_Magefinder_Helper_Url::SEARCH_QUERY
+        );
 		return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
