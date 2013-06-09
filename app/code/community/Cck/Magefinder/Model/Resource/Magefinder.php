@@ -74,7 +74,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
         }
         return $this;
     }
-    
+
     public function query($queryText, $storeId)
     {
 		$client = $this->_getSearchClient();
@@ -82,6 +82,42 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $params = array(
             'api' => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => $storeId,
+            'q' => $queryText,
+        );
+        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        $client->setParameterGet($params);
+
+        try {
+            $response = $client->request();
+            $this->_logResponse($response, $client);
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return array();
+        }
+        
+        $data = array();
+        if($response->getStatus() != 200) {
+            return $data; 
+        }
+        $resultBody = json_decode($response->getBody());
+        if($resultBody->found > 0) {
+            foreach($resultBody->hits as $hit) {
+                $data[] = (array)$hit;
+            }
+        }
+        return $data;
+    }
+
+    public function suggest($queryText)
+    {
+		$client = $this->_getSearchClient(
+                Cck_Magefinder_Helper_Url::SEARCH_SUGGEST
+        );
+        
+        $params = array(
+            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'store' => Mage::app()->getStore()->getId(),
             'q' => $queryText,
         );
         
@@ -118,11 +154,9 @@ class Cck_Magefinder_Model_Resource_Magefinder
         ));
     }
     
-    protected function _getSearchClient()
+    protected function _getSearchClient($type = Cck_Magefinder_Helper_Url::SEARCH_QUERY)
     {
-        $url = Mage::helper('magefinder/url')->getSearchUrl(
-                Cck_Magefinder_Helper_Url::SEARCH_QUERY
-        );
+        $url = Mage::helper('magefinder/url')->getSearchUrl($type);
 		return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
