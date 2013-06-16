@@ -12,13 +12,10 @@ class Cck_Magefinder_Model_Resource_Magefinder
     {
 		$client = $this->_getDocClient();
         
-        $params = array(
-            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+        $params = $this->_getParams(array(
             'action' => 'update',
             'store' => $storeId,
-        );
-        
-        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        ));
         $client->setParameterGet($params);
 
         try {
@@ -35,13 +32,10 @@ class Cck_Magefinder_Model_Resource_Magefinder
     {
 		$client = $this->_getDocClient();
         
-        $params = array(
-            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+        $params = $this->_getParams(array(
             'store' => $storeId,
             'action' => 'truncate',
-        );
-        
-        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        ));
         $client->setParameterGet($params);
 
         try {
@@ -56,13 +50,10 @@ class Cck_Magefinder_Model_Resource_Magefinder
     {
 		$client = $this->_getDocClient();
         
-        $params = array(
-            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+        $params = $this->_getParams(array(
             'store' => $storeId,
             'action' => 'delete',
-        );
-        
-        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        ));
         $client->setParameterGet($params);
 
         try {
@@ -79,13 +70,10 @@ class Cck_Magefinder_Model_Resource_Magefinder
     {
 		$client = $this->_getSearchClient();
         
-        $params = array(
-            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+        $params = $this->_getParams(array(
             'store' => $storeId,
             'q' => $queryText,
-        );
-        
-        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        ));
         $client->setParameterGet($params);
 
         try {
@@ -95,9 +83,9 @@ class Cck_Magefinder_Model_Resource_Magefinder
             Mage::logException($e);
             return array();
         }
-        
+
         $data = array();
-        if($response->getStatus() != 200) {
+        if(!$response->isSuccessful()) {
             return $data; 
         }
         $resultBody = json_decode($response->getBody());
@@ -106,6 +94,30 @@ class Cck_Magefinder_Model_Resource_Magefinder
                 $data[] = (array)$hit;
             }
         }
+        return $data;
+    }
+    
+    public function status()
+    {
+        $client = $this->_getDocClient();
+        
+        $params = $this->_getParams(array(
+            'action' => 'status'
+        ));
+        $client->setParameterGet($params);
+
+        try {
+            $response = $client->request();
+            $this->_logResponse($response, $client);
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return array();
+        }
+
+        if(!$response->isSuccessful()) {
+            return array(); 
+        }
+        $data = json_decode($response->getBody(), true);
         return $data;
     }
     
@@ -126,6 +138,13 @@ class Cck_Magefinder_Model_Resource_Magefinder
 		return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
+    }
+    
+    protected function _getParams(array $params = array())
+    {
+        $params['api'] = Mage::getStoreConfig('magefinder/general/access_key');        
+        $params['hash'] = Mage::helper('magefinder')->generateHash($params);
+        return $params;
     }
     
     protected function _logResponse(Zend_Http_Response $response, Zend_Http_Client $client)

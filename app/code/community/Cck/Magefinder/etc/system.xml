@@ -25,6 +25,14 @@
                     <show_in_store>1</show_in_store>
                     <sort_order>10</sort_order>
                     <fields>
+                        <header translate="label">
+                            <label>Magefinder</label>
+                            <frontend_model>magefinder/adminhtml_config_header</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header>
                         <version translate="label">
                             <label>Extension Version</label>
                             <frontend_type>text</frontend_type>
@@ -59,6 +67,14 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </access_secret>
+                        <status translate="label">
+                            <label>Status</label>
+                            <frontend_model>magefinder/adminhtml_config_status</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </status>
                     </fields>
                 </general>
                 <advanced>

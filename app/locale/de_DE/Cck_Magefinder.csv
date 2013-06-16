@@ -32,3 +32,8 @@
 "Unsigned Integer Field 5","Zahlenfeld 5"
 "After mapping attributes go to 'System > Index Management' and run reindex of 'Catalog Search Index'","Nach dem Bearbeiten der Verbindungen starten sie die Indexierung unter 'System > Index-Verwaltung' über 'Katalog Suchindex' neu"
 "do not use","nicht verwenden"
+"To activate this extension you need an account from <a href='http://%s' target='_blank'>%s</a>","Um dieses Modul zu aktivieren, brauchen sie einen Zugang bei <a href='http://%s' target='_blank'>%s</a>"
+"Your account is active.","Ihr Zugang ist aktiv."
+"Your account is not active.","Ihr Zugang ist nicht aktiv."
+"No account found.","Kein Zugang gefunden."
+"Request status","Status abfragen"
