@@ -121,6 +121,25 @@ class Cck_Magefinder_Model_Resource_Magefinder
         return $data;
     }
     
+    public function index()
+    {
+        $client = $this->_getDocClient();
+        
+        $params = $this->_getParams(array(
+            'action' => 'index'
+        ));
+        $client->setParameterGet($params);
+
+        try {
+            $response = $client->request();
+            $this->_logResponse($response, $client);
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return array();
+        }
+        return $this;
+    }
+    
     protected function _getDocClient()
     {
         $url = Mage::helper('magefinder/url')->getDocumentUrl();

@@ -69,6 +69,16 @@
                 <unit_05>Unsigned Integer Field 5</unit_05>
             </attributes>
         </magefinder>
+        <events>
+            <catalogsearch_index_process_complete>
+                <observers>
+                    <trigger_reindex>
+                        <class>magefinder/observer</class>
+                        <method>triggerReindex</method>
+                    </trigger_reindex>
+                </observers>
+            </catalogsearch_index_process_complete>
+        </events>
 	</global>
     <admin>
 		<routers>
