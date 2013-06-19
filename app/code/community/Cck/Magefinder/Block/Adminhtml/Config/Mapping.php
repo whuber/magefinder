@@ -61,15 +61,11 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
         } elseif ($columnName == 'search_attribute') {
             $searchAttributes = Mage::getConfig()->getNode('global/magefinder/attributes');
             $html = '<select class="select" name="' . $inputName . '" style="'.$column['style'].'">';
-            $html .= '<option value="">'
-                    . $this->__('-- Please Select --')
-                    .'</option>';
+            $html .= '<option value="-">' . $this->__('-- Please Select --') .'</option>';
             foreach ($searchAttributes->children() as $name => $title) {
                 $html .= '<option value="'.$name.'" #{option_search_'.$name.'}>' . $this->__((string)$title) . '</option>';
             }
-            $html .= '<option value="">'
-                    . $this->__("do not use")
-                    .'</option>';
+            $html .= '<option value="" #{option_search_}>' . $this->__("do not use") .'</option>';
             $html .= '</select>';
             return $html;
         }
