@@ -8,17 +8,17 @@
  */
 -->
 <config>
-	<modules>
-		<Cck_Magefinder>
-			<version>1.7.0.0</version>
-		</Cck_Magefinder>
-	</modules>
-	<global>
-		<models>
-			<magefinder>
-				<class>Cck_Magefinder_Model</class>
+    <modules>
+        <Cck_Magefinder>
+            <version>1.7.0.0</version>
+        </Cck_Magefinder>
+    </modules>
+    <global>
+        <models>
+            <magefinder>
+                <class>Cck_Magefinder_Model</class>
                 <resourceModel>magefinder_resource</resourceModel>
-			</magefinder>
+            </magefinder>
             <magefinder_resource>
                 <class>Cck_Magefinder_Model_Resource</class>
             </magefinder_resource>
@@ -27,28 +27,28 @@
                     <fulltext>Cck_Magefinder_Model_Resource_Fulltext</fulltext>
                 </rewrite>
             </catalogsearch_resource>
-		</models>
-		<blocks>
-			<magefinder>
-				<class>Cck_Magefinder_Block</class>
-			</magefinder>
-		</blocks>
-		<helpers>
-			<magefinder>
-				<class>Cck_Magefinder_Helper</class>
-			</magefinder>
-		</helpers>
+        </models>
+        <blocks>
+            <magefinder>
+                <class>Cck_Magefinder_Block</class>
+            </magefinder>
+        </blocks>
+        <helpers>
+            <magefinder>
+                <class>Cck_Magefinder_Helper</class>
+            </magefinder>
+        </helpers>
         <resources>
-           <magefinder_setup>
-               <setup>
-                   <module>Cck_Magefinder</module>
-               </setup>
-           </magefinder_setup>
+            <magefinder_setup>
+                <setup>
+                    <module>Cck_Magefinder</module>
+                </setup>
+            </magefinder_setup>
         </resources>
         <magefinder>
             <attributes>
-                <name>Name</name>                
-                <sku>Sku</sku>                
+                <name>Name</name>
+                <sku>Sku</sku>
                 <short_description>Short Description</short_description>
                 <description>Description</description>
                 <price>Price</price>
@@ -79,17 +79,17 @@
                 </observers>
             </catalogsearch_index_process_complete>
         </events>
-	</global>
+    </global>
     <admin>
-		<routers>
-			<magefinder>
-				<use>admin</use>
-				<args>
-					<module>Cck_Magefinder</module>
-					<frontName>magefinder</frontName>
-				</args>
-			</magefinder>
-		</routers>
+        <routers>
+            <magefinder>
+                <use>admin</use>
+                <args>
+                    <module>Cck_Magefinder</module>
+                    <frontName>magefinder</frontName>
+                </args>
+            </magefinder>
+        </routers>
     </admin>
     <adminhtml>
         <translate>

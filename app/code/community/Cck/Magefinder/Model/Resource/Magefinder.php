@@ -8,10 +8,10 @@
 class Cck_Magefinder_Model_Resource_Magefinder
 {
 
-    public function import($data, $storeId) 
+    public function import($data, $storeId)
     {
-		$client = $this->_getDocClient();
-        
+        $client = $this->_getDocClient();
+
         $params = $this->_getParams(array(
             'action' => 'update',
             'store' => $storeId,
@@ -26,12 +26,12 @@ class Cck_Magefinder_Model_Resource_Magefinder
         } catch (Exception $e) {
             Mage::logException($e);
         }
- 	}
-    
+    }
+
     public function truncate($storeId)
     {
-		$client = $this->_getDocClient();
-        
+        $client = $this->_getDocClient();
+
         $params = $this->_getParams(array(
             'store' => $storeId,
             'action' => 'truncate',
@@ -45,11 +45,11 @@ class Cck_Magefinder_Model_Resource_Magefinder
             Mage::logException($e);
         }
     }
-    
+
     public function delete($storeId, $productIds)
     {
-		$client = $this->_getDocClient();
-        
+        $client = $this->_getDocClient();
+
         $params = $this->_getParams(array(
             'store' => $storeId,
             'action' => 'delete',
@@ -65,11 +65,11 @@ class Cck_Magefinder_Model_Resource_Magefinder
         }
         return $this;
     }
-    
+
     public function query($queryText, $storeId)
     {
-		$client = $this->_getSearchClient();
-        
+        $client = $this->_getSearchClient();
+
         $params = $this->_getParams(array(
             'store' => $storeId,
             'q' => $queryText,
@@ -85,22 +85,22 @@ class Cck_Magefinder_Model_Resource_Magefinder
         }
 
         $data = array();
-        if(!$response->isSuccessful()) {
-            return $data; 
+        if (!$response->isSuccessful()) {
+            return $data;
         }
         $resultBody = json_decode($response->getBody());
-        if($resultBody->found > 0) {
-            foreach($resultBody->hits as $hit) {
+        if ($resultBody->found > 0) {
+            foreach ($resultBody->hits as $hit) {
                 $data[] = (array)$hit;
             }
         }
         return $data;
     }
-    
+
     public function status()
     {
         $client = $this->_getDocClient();
-        
+
         $params = $this->_getParams(array(
             'action' => 'status'
         ));
@@ -114,17 +114,17 @@ class Cck_Magefinder_Model_Resource_Magefinder
             return array();
         }
 
-        if(!$response->isSuccessful()) {
-            return array(); 
+        if (!$response->isSuccessful()) {
+            return array();
         }
         $data = json_decode($response->getBody(), true);
         return $data;
     }
-    
+
     public function index()
     {
         $client = $this->_getDocClient();
-        
+
         $params = $this->_getParams(array(
             'action' => 'index'
         ));
@@ -139,36 +139,36 @@ class Cck_Magefinder_Model_Resource_Magefinder
         }
         return $this;
     }
-    
+
     protected function _getDocClient()
     {
         $url = Mage::helper('magefinder/url')->getDocumentUrl();
-		return new Zend_Http_Client($url, array(
+        return new Zend_Http_Client($url, array(
             'timeout' => 300,
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
     }
-    
+
     protected function _getSearchClient()
     {
         $url = Mage::helper('magefinder/url')->getSearchUrl(
-                Cck_Magefinder_Helper_Url::SEARCH_QUERY
+            Cck_Magefinder_Helper_Url::SEARCH_QUERY
         );
-		return new Zend_Http_Client($url, array(
+        return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
     }
-    
+
     protected function _getParams(array $params = array())
     {
-        $params['api'] = Mage::getStoreConfig('magefinder/general/access_key');        
+        $params['api'] = Mage::getStoreConfig('magefinder/general/access_key');
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);
         return $params;
     }
-    
+
     protected function _logResponse(Zend_Http_Response $response, Zend_Http_Client $client)
     {
-        if(!Mage::getStoreConfigFlag('magefinder/advanced/logging')) {
+        if (!Mage::getStoreConfigFlag('magefinder/advanced/logging')) {
             return;
         }
 
@@ -178,5 +178,4 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $helper->log($response->getHeadersAsString());
         $helper->log(json_decode($response->getBody()));
     }
-
 }

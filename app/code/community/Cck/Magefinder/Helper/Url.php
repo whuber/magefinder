@@ -18,7 +18,7 @@ class Cck_Magefinder_Helper_Url extends Mage_Core_Helper_Abstract
     public function getSearchUrl($type = self::SEARCH_QUERY)
     {
         return "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-                . self::SEARCH_QUERY;
+            . self::SEARCH_QUERY;
     }
 
     /**
@@ -28,7 +28,6 @@ class Cck_Magefinder_Helper_Url extends Mage_Core_Helper_Abstract
     public function getDocumentUrl()
     {
         return "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-                . "/document/";
+            . "/document/";
     }
-
 }
