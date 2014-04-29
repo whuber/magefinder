@@ -8,9 +8,8 @@
 class Cck_Magefinder_Block_Adminhtml_Config_Header
     extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
-
     /**
-     * Enter description here...
+     * Render config info block
      *
      * @param Varien_Data_Form_Element_Abstract $element
      * @return string

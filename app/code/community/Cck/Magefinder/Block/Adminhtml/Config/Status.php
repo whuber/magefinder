@@ -24,20 +24,20 @@ class Cck_Magefinder_Block_Adminhtml_Config_Status
     protected function _getStatusButtonHtml()
     {
         $button = $this->getLayout()->createBlock('adminhtml/widget_button')
-                    ->setType('button')
-                    ->setClass('save')
-                    ->setLabel($this->__('Request status'));
-        
-        if(Mage::getStoreConfigFlag('magefinder/general/access_key')
-           && Mage::getStoreConfigFlag('magefinder/general/access_secret')) {
+            ->setType('button')
+            ->setClass('save')
+            ->setLabel($this->__('Request status'));
+
+        if (Mage::getStoreConfigFlag('magefinder/general/access_key')
+            && Mage::getStoreConfigFlag('magefinder/general/access_secret')
+        ) {
             $button->setOnClick("getStatus()");
-        }
-        else {
+        } else {
             $button->setDisabled(1);
         }
         return $button->toHtml();
     }
-    
+
     protected function _getUpdateJs()
     {
         $html = "<script type=\"text/javascript\">//<![CDATA[
@@ -58,7 +58,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Status
             );
         }
         //]]></script>";
-        
+
         return $html;
     }
 }
