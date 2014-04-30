@@ -25,7 +25,7 @@ class Cck_Magefinder_Model_System_Config_Source_Language
     public function toOptionArray()
     {
         $data = array();
-        foreach($this->_allowedLang as $lang) {
+        foreach ($this->_allowedLang as $lang) {
             $data[] = array(
                 'value' => $lang,
                 'label' => Mage::app()->getLocale()->getTranslation($lang, 'language')
@@ -42,10 +42,9 @@ class Cck_Magefinder_Model_System_Config_Source_Language
     public function toArray()
     {
         $data = array();
-        foreach($this->_allowedLang as $lang) {
+        foreach ($this->_allowedLang as $lang) {
             $data[$lang] = Mage::app()->getLocale()->getTranslation($lang, 'language');
         }
         return $data;
     }
-
 }

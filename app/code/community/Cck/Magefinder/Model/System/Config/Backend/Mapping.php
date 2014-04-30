@@ -5,7 +5,7 @@
  * @category   Cck
  * @package    Cck_Magefinder
  */
-class Cck_Magefinder_Model_System_Config_Backend_Mapping 
+class Cck_Magefinder_Model_System_Config_Backend_Mapping
     extends Mage_Adminhtml_Model_System_Config_Backend_Serialized_Array
 {
 
