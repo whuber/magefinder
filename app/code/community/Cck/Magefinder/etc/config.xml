@@ -85,6 +85,19 @@
             </catalogsearch_index_process_complete>
         </events>
     </global>
+    <frontend>
+        <events>
+            <controller_action_predispatch_catalogsearch_result_index>
+                <observers>
+                    <catalog>
+                        <type>model</type>
+                        <class>magefinder/observer</class>
+                        <method>redirectProductSearch</method>
+                    </catalog>
+                </observers>
+            </controller_action_predispatch_catalogsearch_result_index>
+        </events>
+    </frontend>
     <admin>
         <routers>
             <magefinder>
@@ -113,5 +126,10 @@
                 <engine>magefinder/fulltext_engine</engine>
             </search>
         </catalog>
+        <magefinder>
+            <autosuggest>
+                <active>0</active>
+            </autosuggest>
+        </magefinder>
     </default>
 </config>

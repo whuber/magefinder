@@ -17,8 +17,7 @@ class Cck_Magefinder_Helper_Url extends Mage_Core_Helper_Abstract
      */
     public function getSearchUrl($type = self::SEARCH_QUERY)
     {
-        return "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') 
-            . self::SEARCH_QUERY;
+        return "http://" . Mage::getStoreConfig('magefinder/advanced/search_endpoint') . $type;
     }
 
     /**
@@ -27,7 +26,6 @@ class Cck_Magefinder_Helper_Url extends Mage_Core_Helper_Abstract
      */
     public function getDocumentUrl()
     {
-        return "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') 
-            . "/document/";
+        return "http://" . Mage::getStoreConfig('magefinder/advanced/doc_endpoint') . "/document/";
     }
 }

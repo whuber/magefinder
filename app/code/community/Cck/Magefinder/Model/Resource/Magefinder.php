@@ -100,7 +100,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
     public function suggest($queryText)
     {
 		$client = $this->_getSearchClient(
-                Cck_Magefinder_Helper_Url::SEARCH_SUGGEST
+            Cck_Magefinder_Helper_Url::SEARCH_SUGGEST
         );
         
         $params = array(
@@ -188,9 +188,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
 
     protected function _getSearchClient($type = Cck_Magefinder_Helper_Url::SEARCH_QUERY)
     {
-        $url = Mage::helper('magefinder/url')->getSearchUrl(
-            Cck_Magefinder_Helper_Url::SEARCH_QUERY
-        );
+        $url = Mage::helper('magefinder/url')->getSearchUrl($type);
         return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));

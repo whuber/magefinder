@@ -15,7 +15,7 @@ class Cck_Magefinder_Model_Observer
 
         return $this;
     }
-}
+
     /**
      * Forward search result to product view
      *
@@ -37,3 +37,4 @@ class Cck_Magefinder_Model_Observer
         }
         return $this;
     }
+}
