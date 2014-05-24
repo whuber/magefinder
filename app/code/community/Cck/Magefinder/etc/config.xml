@@ -8,17 +8,17 @@
  */
 -->
 <config>
-	<modules>
-		<Cck_Magefinder>
-			<version>1.7.0.0</version>
-		</Cck_Magefinder>
-	</modules>
-	<global>
-		<models>
-			<magefinder>
-				<class>Cck_Magefinder_Model</class>
+    <modules>
+        <Cck_Magefinder>
+            <version>1.7.0.0</version>
+        </Cck_Magefinder>
+    </modules>
+    <global>
+        <models>
+            <magefinder>
+                <class>Cck_Magefinder_Model</class>
                 <resourceModel>magefinder_resource</resourceModel>
-			</magefinder>
+            </magefinder>
             <magefinder_resource>
                 <class>Cck_Magefinder_Model_Resource</class>
             </magefinder_resource>
@@ -27,33 +27,33 @@
                     <fulltext>Cck_Magefinder_Model_Resource_Fulltext</fulltext>
                 </rewrite>
             </catalogsearch_resource>
-		</models>
-		<blocks>
-			<magefinder>
-				<class>Cck_Magefinder_Block</class>
-			</magefinder>
+        </models>
+        <blocks>
+            <magefinder>
+                <class>Cck_Magefinder_Block</class>
+            </magefinder>
             <catalogsearch>
                 <rewrite>
                     <autocomplete>Cck_Magefinder_Block_Autocomplete</autocomplete>
                 </rewrite>
             </catalogsearch>
-		</blocks>
-		<helpers>
-			<magefinder>
-				<class>Cck_Magefinder_Helper</class>
-			</magefinder>
-		</helpers>
+        </blocks>
+        <helpers>
+            <magefinder>
+                <class>Cck_Magefinder_Helper</class>
+            </magefinder>
+        </helpers>
         <resources>
-           <magefinder_setup>
-               <setup>
-                   <module>Cck_Magefinder</module>
-               </setup>
-           </magefinder_setup>
+            <magefinder_setup>
+                <setup>
+                    <module>Cck_Magefinder</module>
+                </setup>
+            </magefinder_setup>
         </resources>
         <magefinder>
             <attributes>
-                <name>Name</name>                
-                <sku>Sku</sku>                
+                <name>Name</name>
+                <sku>Sku</sku>
                 <short_description>Short Description</short_description>
                 <description>Description</description>
                 <price>Price</price>
@@ -62,42 +62,39 @@
                 <text_03>Text Field 3</text_03>
                 <text_04>Text Field 4</text_04>
                 <text_05>Text Field 5</text_05>
+                <text_06>Text Field 6</text_06>
+                <text_07>Text Field 7</text_07>
+                <text_08>Text Field 8</text_08>
+                <text_09>Text Field 9</text_09>
+                <text_10>Text Field 10</text_10>
                 <literal_01>Literal Field 1</literal_01>
                 <literal_02>Literal Field 2</literal_02>
                 <literal_03>Literal Field 3</literal_03>
                 <literal_04>Literal Field 4</literal_04>
                 <literal_05>Literal Field 5</literal_05>
-                <unit_01>Unsigned Integer Field 1</unit_01>
-                <unit_02>Unsigned Integer Field 2</unit_02>
-                <unit_03>Unsigned Integer Field 3</unit_03>
-                <unit_04>Unsigned Integer Field 4</unit_04>
-                <unit_05>Unsigned Integer Field 5</unit_05>
             </attributes>
         </magefinder>
-	</global>
-    <frontend>
         <events>
-            <controller_action_predispatch_catalogsearch_result_index>
+            <catalogsearch_index_process_complete>
                 <observers>
-                    <magefinder>
-                        <type>model</type>
+                    <trigger_reindex>
                         <class>magefinder/observer</class>
-                        <method>redirectProductSearch</method>
-                    </magefinder>
+                        <method>triggerReindex</method>
+                    </trigger_reindex>
                 </observers>
-            </controller_action_predispatch_catalogsearch_result_index>
+            </catalogsearch_index_process_complete>
         </events>
-    </frontend>
+    </global>
     <admin>
-		<routers>
-			<magefinder>
-				<use>admin</use>
-				<args>
-					<module>Cck_Magefinder</module>
-					<frontName>magefinder</frontName>
-				</args>
-			</magefinder>
-		</routers>
+        <routers>
+            <magefinder>
+                <use>admin</use>
+                <args>
+                    <module>Cck_Magefinder</module>
+                    <frontName>magefinder</frontName>
+                </args>
+            </magefinder>
+        </routers>
     </admin>
     <adminhtml>
         <translate>

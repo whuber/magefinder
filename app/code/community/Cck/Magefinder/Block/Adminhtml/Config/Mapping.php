@@ -48,8 +48,8 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
 
             $html = '<select class="select" name="' . $inputName . '" style="'.$column['style'].'">';
             $html .= '<option value="">'
-                    . $this->__('-- Please Select --')
-                    .'</option>';
+                . $this->__('-- Please Select --')
+                .'</option>';
             foreach ($productAttributeCollection->getItems() as $attribute) {
                 $html .= '<option value="'.$attribute->getAttributeCode().'" #{option_'.$attribute->getAttributeCode().'}>'
                     .addslashes($attribute->getFrontendLabel()).' ('.$attribute->getAttributeCode().', ' . $attribute->getFrontendInput() . ')'
@@ -61,15 +61,11 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
         } elseif ($columnName == 'search_attribute') {
             $searchAttributes = Mage::getConfig()->getNode('global/magefinder/attributes');
             $html = '<select class="select" name="' . $inputName . '" style="'.$column['style'].'">';
-            $html .= '<option value="">'
-                    . $this->__('-- Please Select --')
-                    .'</option>';
+            $html .= '<option value="-">' . $this->__('-- Please Select --') .'</option>';
             foreach ($searchAttributes->children() as $name => $title) {
                 $html .= '<option value="'.$name.'" #{option_search_'.$name.'}>' . $this->__((string)$title) . '</option>';
             }
-            $html .= '<option value="">'
-                    . $this->__("do not use")
-                    .'</option>';
+            $html .= '<option value="" #{option_search_}>' . $this->__("do not use") .'</option>';
             $html .= '</select>';
             return $html;
         }
@@ -78,6 +74,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Mapping
     /**
      * Assign selected value to row
      *
+     * @return void
      */
     protected function _prepareArrayRow(Varien_Object $row)
     {

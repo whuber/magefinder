@@ -7,13 +7,12 @@
  */
 class Cck_Magefinder_Model_Resource_Fulltext_Engine 
 {
-
     /**
      * Add entity data to cloud search system
      *
-     * @param int $entityId
-     * @param int $storeId
-     * @param array $index
+     * @param int    $entityId
+     * @param int    $storeId
+     * @param array  $index
      * @param string $entity 'product'
      * @return Cck_Magefinder_Model_Resource_Fulltext_Engine
      */
@@ -31,17 +30,17 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         }
 
         return $this;
-	}
+    }
 
     /**
      * Define if current search engine supports advanced index
      *
      * @return bool
      */
-	public function allowAdvancedIndex()
+    public function allowAdvancedIndex()
     {
-		return false;
-	}
+        return false;
+    }
 
     /**
      * Remove entity data from cloud search system
@@ -55,8 +54,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
     {
         if(is_null($entityId)) {
             $this->_getDocAdapter()->truncate($storeId);
-        }
-        else {
+        } else {
             $this->_getDocAdapter()->delete($storeId, $entityId);
         }
     }
@@ -101,7 +99,7 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
     {
         return Mage::getStoreConfigFlag('magefinder/general/active');
     }
-    
+
     /**
      * Retrieve connection for index data
      *
@@ -125,5 +123,4 @@ class Cck_Magefinder_Model_Resource_Fulltext_Engine
         Mage::log($args);
         return Mage::getResourceSingleton('catalogsearch/fulltext_engine')->$method($args);
     }
-
-};
+}

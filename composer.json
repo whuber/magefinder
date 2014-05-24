@@ -1,0 +1,21 @@
+{
+    "name": "whuber/magefinder",
+    "type": "magento-module",
+    "description": "Magefinder - the better search for Magento on Amazon Cloudsearch",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Walter Huber",
+            "email": "walter@flimmit.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ]
+}
