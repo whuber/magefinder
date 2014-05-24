@@ -32,6 +32,11 @@
 			<magefinder>
 				<class>Cck_Magefinder_Block</class>
 			</magefinder>
+            <catalogsearch>
+                <rewrite>
+                    <autocomplete>Cck_Magefinder_Block_Autocomplete</autocomplete>
+                </rewrite>
+            </catalogsearch>
 		</blocks>
 		<helpers>
 			<magefinder>
@@ -70,6 +75,19 @@
             </attributes>
         </magefinder>
 	</global>
+    <frontend>
+        <events>
+            <controller_action_predispatch_catalogsearch_result_index>
+                <observers>
+                    <magefinder>
+                        <type>model</type>
+                        <class>magefinder/observer</class>
+                        <method>redirectProductSearch</method>
+                    </magefinder>
+                </observers>
+            </controller_action_predispatch_catalogsearch_result_index>
+        </events>
+    </frontend>
     <admin>
 		<routers>
 			<magefinder>
