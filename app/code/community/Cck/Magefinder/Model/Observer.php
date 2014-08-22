@@ -37,4 +37,23 @@ class Cck_Magefinder_Model_Observer
         }
         return $this;
     }
+
+    /**
+     * Check if Num Results in 0, then set is_prosessed to 0
+     * in order to always request spellchecker if enabled
+     *
+     * @param   Varien_Event_Observer $observer
+     * @return  Cck_Magefinder_Model_Observer
+     */
+    public function beforeSaveEmptyQuery(Varien_Event_Observer $observer)
+    {
+        if(!Mage::getStoreConfigFlag('magefinder/spellcheck/active')) {
+            return $this;
+        }
+        $query = $observer->getCatalogsearchQuery();
+        if(0 == $query->getNumResults()) {
+            $query->setIsProcessed(0);
+        }
+        return $this;
+    }
 }
