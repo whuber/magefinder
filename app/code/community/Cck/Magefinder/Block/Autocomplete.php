@@ -41,15 +41,12 @@ class Cck_Magefinder_Block_Autocomplete extends Mage_CatalogSearch_Block_Autocom
                 $item['row_class'] .= ' last';
             }
             
-            $name = Mage::helper('core/string')->truncate($item['name']);
-            
-            $query = $this->helper('catalogsearch')->getQueryText();
-            $name = preg_replace("%($query)%i", "|***$1***|", $name);
+            $name = Mage::helper('core/string')->truncate($item['highlight']);
             $name = $this->escapeHtml($name);
-            $name = strtr ($name , array('|***' => '<b>', '***|' => '</b>'));
+            $name = strtr($name , array('*|**' => '<b>', '**|*' => '</b>'));
 
             $html .=  '<li title="product:'.$this->escapeHtml($item['product_id'])
-                . '" class="'.$item['row_class'].'">' . ($name).'</li>';
+                . '" class="'.$item['row_class'].'">' . ($name) . '</li>';
         }
 
         $html.= '</ul>';
@@ -68,8 +65,8 @@ class Cck_Magefinder_Block_Autocomplete extends Mage_CatalogSearch_Block_Autocom
                 $item['row_class'] = (++$counter)%2?'odd':'even';
                 $data[] = $item;
             }
-            $this->_suggestData = $data;
+            $this->_magefinderData = $data;
         }
-        return $this->_suggestData;
+        return $this->_magefinderData;
     }
 }

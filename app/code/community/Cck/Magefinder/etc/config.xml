@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Cck_Magefinder>
-            <version>1.7.0.0</version>
+            <version>1.7.1.0</version>
         </Cck_Magefinder>
     </modules>
     <global>
@@ -62,11 +62,6 @@
                 <text_03>Text Field 3</text_03>
                 <text_04>Text Field 4</text_04>
                 <text_05>Text Field 5</text_05>
-                <text_06>Text Field 6</text_06>
-                <text_07>Text Field 7</text_07>
-                <text_08>Text Field 8</text_08>
-                <text_09>Text Field 9</text_09>
-                <text_10>Text Field 10</text_10>
                 <literal_01>Literal Field 1</literal_01>
                 <literal_02>Literal Field 2</literal_02>
                 <literal_03>Literal Field 3</literal_03>
@@ -127,6 +122,9 @@
             </search>
         </catalog>
         <magefinder>
+            <general>
+                <language>de</language>
+            </general>
             <autosuggest>
                 <active>0</active>
             </autosuggest>

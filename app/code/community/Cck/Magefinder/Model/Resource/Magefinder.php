@@ -14,7 +14,8 @@ class Cck_Magefinder_Model_Resource_Magefinder
 
         $params = $this->_getParams(array(
             'action' => 'update',
-            'store' => $storeId,
+            'store'  => $storeId,
+            'lang'   => Mage::getStoreConfig('magefinder/general/language', $storeId),
         ));
         $client->setParameterGet($params);
 
@@ -99,14 +100,14 @@ class Cck_Magefinder_Model_Resource_Magefinder
 
     public function suggest($queryText)
     {
-		$client = $this->_getSearchClient(
+        $client = $this->_getSearchClient(
             Cck_Magefinder_Helper_Url::SEARCH_SUGGEST
         );
         
         $params = array(
-            'api' => Mage::getStoreConfig('magefinder/general/access_key'),
+            'api'   => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => Mage::app()->getStore()->getId(),
-            'q' => $queryText,
+            'q'     => $queryText,
         );
         
         $params['hash'] = Mage::helper('magefinder')->generateHash($params);

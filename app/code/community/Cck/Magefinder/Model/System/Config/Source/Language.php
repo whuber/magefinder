@@ -14,6 +14,7 @@
 class Cck_Magefinder_Model_System_Config_Source_Language
 {
     protected $_allowedLang = array(
+        'de',
         'en',
     );
 
