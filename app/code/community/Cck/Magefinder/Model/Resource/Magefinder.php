@@ -20,7 +20,6 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $client->setParameterGet($params);
 
         try {
-//            Mage::log($data);
             $client->setRawData(json_encode($data), "application/json");
             $response = $client->request("POST");
             $this->_logResponse($response, $client);
@@ -74,7 +73,9 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $params = $this->_getParams(array(
             'store' => $storeId,
             'q' => $queryText,
+            'spell' => (int)Mage::getStoreConfig('magefinder/spellcheck/active'),
         ));
+        
         $client->setParameterGet($params);
 
         try {
@@ -90,10 +91,24 @@ class Cck_Magefinder_Model_Resource_Magefinder
             return $data;
         }
         $resultBody = json_decode($response->getBody());
+//        Mage::log($resultBody);
         if ($resultBody->found > 0) {
             foreach ($resultBody->hits as $hit) {
                 $data[] = (array)$hit;
             }
+        }
+        elseif(isset($resultBody->spellcheck)) {
+            $_helper = Mage::helper('catalogsearch');
+            $suggestions = array();
+            foreach($resultBody->spellcheck as $suggestion) {
+                $suggestions[] = sprintf(
+                    '<a href="%s" class="spellcheck">%s</a>', 
+                    $_helper->getResultUrl($suggestion),
+                    $suggestion
+                );
+            }
+            $message = Mage::helper('magefinder')->__("Did you mean: %s", implode(', ', $suggestions));
+            $_helper->addNoteMessage($message);
         }
         return $data;
     }
@@ -190,6 +205,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
     protected function _getSearchClient($type = Cck_Magefinder_Helper_Url::SEARCH_QUERY)
     {
         $url = Mage::helper('magefinder/url')->getSearchUrl($type);
+        Mage::log("Url: $url");
         return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));

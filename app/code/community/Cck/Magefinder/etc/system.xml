@@ -130,7 +130,7 @@
                         </logging>
                     </fields>
                 </advanced>
-                <autosuggest>
+                <autosuggest translate="label" module="magefinder">
                     <label>Autosuggest</label>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -148,6 +148,24 @@
                         </active>
                     </fields>
                 </autosuggest>
+                <spellcheck translate="label" module="magefinder">
+                    <label>Spellcheck</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>40</sort_order>
+                    <fields>
+                        <active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                    </fields>
+                </spellcheck>
             </groups>
         </magefinder>
     </sections>

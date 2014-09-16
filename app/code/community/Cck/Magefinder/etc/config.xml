@@ -84,14 +84,32 @@
         <events>
             <controller_action_predispatch_catalogsearch_result_index>
                 <observers>
-                    <catalog>
+                    <magefinder>
                         <type>model</type>
                         <class>magefinder/observer</class>
                         <method>redirectProductSearch</method>
-                    </catalog>
+                    </magefinder>
                 </observers>
             </controller_action_predispatch_catalogsearch_result_index>
+            <catalogsearch_query_save_before>
+                <observers>
+                    <magefinder_spellcheck>
+                        <type>model</type>
+                        <class>magefinder/observer</class>
+                        <method>beforeSaveEmptyQuery</method>
+                    </magefinder_spellcheck>
+                </observers>
+            </catalogsearch_query_save_before>
         </events>
+        <translate>
+            <modules>
+                <Cck_Magefinder>
+                    <files>
+                        <default>Cck_Magefinder.csv</default>
+                    </files>
+                </Cck_Magefinder>
+            </modules>
+        </translate>
     </frontend>
     <admin>
         <routers>
@@ -128,6 +146,9 @@
             <autosuggest>
                 <active>0</active>
             </autosuggest>
+            <spellcheck>
+                <active>0</active>
+            </spellcheck>
         </magefinder>
     </default>
 </config>
