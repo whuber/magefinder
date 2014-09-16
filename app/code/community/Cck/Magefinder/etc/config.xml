@@ -93,6 +93,11 @@
             </controller_action_predispatch_catalogsearch_result_index>
             <catalogsearch_query_save_before>
                 <observers>
+                    <magefinder_skip_save>
+                        <type>model</type>
+                        <class>magefinder/observer</class>
+                        <method>skipSaveQuery</method>
+                    </magefinder_skip_save>
                     <magefinder_spellcheck>
                         <type>model</type>
                         <class>magefinder/observer</class>

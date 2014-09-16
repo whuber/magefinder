@@ -56,4 +56,19 @@ class Cck_Magefinder_Model_Observer
         }
         return $this;
     }
+
+    /**
+     * Check if skip flag for saving query is active
+     *
+     * @param   Varien_Event_Observer $observer
+     * @return  Cck_Magefinder_Model_Observer
+     */
+    public function skipSaveQuery(Varien_Event_Observer $observer)
+    {
+        $query = $observer->getCatalogsearchQuery();
+        if(true === Mage::helper('magefinder')->getSkipSaveQuery()) {
+            $query->setIsProcessed(0);
+        }
+        return $this;
+    }
 }

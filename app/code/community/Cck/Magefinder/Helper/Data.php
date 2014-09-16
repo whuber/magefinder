@@ -11,6 +11,7 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_excl_mapping = null;
     protected $_version      = null;
     protected $_user_agent   = null;
+    protected $_skip_save    = false;
 
     /**
      * Join index array to string by separator
@@ -123,6 +124,20 @@ class Cck_Magefinder_Helper_Data extends Mage_Core_Helper_Abstract
                 . Mage::getConfig()->getModuleConfig('Cck_Magefinder')->version;
         }
         return $this->_user_agent;
+    }
+
+    /*
+     * Skip saving query result due to error or flapping status
+     */
+    public function setSkipSaveQuery($flag = true)
+    {
+        $this->_skip_save = (boolean)$flag;
+        return $this;
+    }
+
+    public function getSkipSaveQuery()
+    {
+        return $this->_skip_save;
     }
 
     public function log($message)

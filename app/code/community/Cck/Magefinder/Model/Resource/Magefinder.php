@@ -88,6 +88,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
 
         $data = array();
         if (!$response->isSuccessful()) {
+            Mage::helper('magefinder')->setSkipSaveQuery();
             return $data;
         }
         $resultBody = json_decode($response->getBody());

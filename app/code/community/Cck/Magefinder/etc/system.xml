@@ -67,6 +67,15 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </access_secret>
+                        <language translate="label">
+                            <label>Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>magefinder/system_config_source_language</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </language>
                         <status translate="label">
                             <label>Status</label>
                             <frontend_model>magefinder/adminhtml_config_status</frontend_model>
@@ -110,20 +119,11 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </search_endpoint>
-                        <language translate="label">
-                            <label>Language</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>magefinder/system_config_source_language</source_model>
-                            <sort_order>50</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </language>
                         <logging translate="label">
                             <label>Logging</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>50</sort_order>
+                            <sort_order>40</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -148,7 +148,7 @@
                         </active>
                     </fields>
                 </autosuggest>
-                <spellcheck translate="label" module="magefinder">
+                <!--spellcheck translate="label" module="magefinder">
                     <label>Spellcheck</label>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -165,7 +165,7 @@
                             <show_in_store>1</show_in_store>
                         </active>
                     </fields>
-                </spellcheck>
+                </spellcheck-->
             </groups>
         </magefinder>
     </sections>
