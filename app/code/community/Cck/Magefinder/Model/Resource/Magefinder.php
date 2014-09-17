@@ -73,6 +73,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $params = $this->_getParams(array(
             'store' => $storeId,
             'q' => $queryText,
+            'lang'   => Mage::getStoreConfig('magefinder/general/language', $storeId),
             'spell' => (int)Mage::getStoreConfig('magefinder/spellcheck/active'),
         ));
         
@@ -123,6 +124,7 @@ class Cck_Magefinder_Model_Resource_Magefinder
         $params = array(
             'api'   => Mage::getStoreConfig('magefinder/general/access_key'),
             'store' => Mage::app()->getStore()->getId(),
+            'lang'   => Mage::getStoreConfig('magefinder/general/language', $storeId),
             'q'     => $queryText,
         );
         
@@ -149,7 +151,6 @@ class Cck_Magefinder_Model_Resource_Magefinder
         }
         return $data;
     }
-    
 
     public function status()
     {
