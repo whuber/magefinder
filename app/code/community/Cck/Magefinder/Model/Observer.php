@@ -71,4 +71,21 @@ class Cck_Magefinder_Model_Observer
         }
         return $this;
     }
+    
+
+    /**
+     * Refresh query result from Magefinder if param "refresh" is set
+     *
+     * @param   Varien_Event_Observer $observer
+     * @return  Cck_Magefinder_Model_Observer
+     */
+    public function refreshQuery(Varien_Event_Observer $observer)
+    {
+        $query = $observer->getCatalogsearchQuery();
+        $refresh = Mage::app()->getRequest()->getParam('refresh', false);
+        if('1' == $refresh) {
+            $query->setIsProcessed(0);
+        }
+        return $this;
+    }
 }

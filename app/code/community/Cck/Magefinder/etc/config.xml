@@ -105,6 +105,15 @@
                     </magefinder_spellcheck>
                 </observers>
             </catalogsearch_query_save_before>
+            <catalogsearch_query_load_after>
+                <observers>
+                    <magefinder_refresh_query>
+                        <type>model</type>
+                        <class>magefinder/observer</class>
+                        <method>refreshQuery</method>
+                    </magefinder_refresh_query>
+                </observers>
+            </catalogsearch_query_load_after>
         </events>
         <translate>
             <modules>

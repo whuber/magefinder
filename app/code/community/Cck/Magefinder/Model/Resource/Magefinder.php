@@ -206,7 +206,6 @@ class Cck_Magefinder_Model_Resource_Magefinder
     protected function _getSearchClient($type = Cck_Magefinder_Helper_Url::SEARCH_QUERY)
     {
         $url = Mage::helper('magefinder/url')->getSearchUrl($type);
-        Mage::log("Url: $url");
         return new Zend_Http_Client($url, array(
             'useragent' => Mage::helper('magefinder')->getUserAgent()
         ));
