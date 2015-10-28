@@ -127,13 +127,13 @@
     </frontend>
     <admin>
         <routers>
-            <magefinder>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Cck_Magefinder</module>
-                    <frontName>magefinder</frontName>
+                    <modules>
+                        <magefinder before="Mage_Adminhtml">Cck_Magefinder_Adminhtml</magefinder>
+                    </modules>
                 </args>
-            </magefinder>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>
