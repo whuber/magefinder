@@ -43,7 +43,7 @@ class Cck_Magefinder_Block_Adminhtml_Config_Status
         $html = "<script type=\"text/javascript\">//<![CDATA[
         function getStatus() {
             new Ajax.Request(
-                '" . $this->getUrl('magefinder/adminhtml_ajax/status') . "',
+                '" . $this->getUrl('adminhtml/magefinder_ajax/status') . "',
                 {
                     onSuccess: function(transport) {
                         $('mf-status').innerHTML = transport.responseJSON.message;

@@ -6,7 +6,7 @@
  * @package    Cck_Magefinder
  */
 
-class Cck_Magefinder_Adminhtml_AjaxController extends Mage_Adminhtml_Controller_Action
+class Cck_Magefinder_Adminhtml_Magefinder_AjaxController extends Mage_Adminhtml_Controller_Action
 {
     public function statusAction()
     {
